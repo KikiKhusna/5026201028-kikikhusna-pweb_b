@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>uts_pweb</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="jquery-3.1.0.min.js"></script>
+    <script src="jquery.validate.min.js"></script>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            <p>Kiki Khusna Handayani</p>
+            <p>Kiki</p>
+            <p>5026201028</p>
+        </div>
+        <div class="card-body">
+            <div class="container rounded">
+                <h4><center>Form Pendaftaran Kuota Internet</center></h4> <br>
+                <form name="form_uts" id="form_uts" action="google.php" method="post">
+                    <div class="row mb-3 form-group">
+                        <label for="nama_mahasiswa" class="col-2 col-form-label">Nama Mahasiswa:</label>
+                        <div class="col-10">
+                            <input type="text" class="form-control" id="nama_mahasiswa" required>
+                        </div>
+                        <div class="col-4 mt-1 text-danger" id="nama_mahasiswa_error">
+                            Harus diisi dengan alphabet dan minimal 1 huruf
+                        </div>
+                    </div>
+                    <div class="row mb-3 form-group">
+                        <label for="nrp_mahasiswa" class="col-2 col-form-label">NRP Mahasiswa:</label>
+                        <div class="col-10">
+                            <input type="number" class="form-control" id="nrp_mahasiswa" required>
+                        </div>
+                        <div class="col-4 mt-1 text-danger" id="nrp_mahasiswa_error">
+                            Harus diisi dengan angka dan 10 digit
+                        </div>
+                    </div>
+                    <div class="row mb-3 form-group">
+                        <label for="data_jurusan" class="col-2 col-form-label">Data Jurusan:</label>
+                        <div class="col-10">
+                            <select name="data_jurusan" id="data_jurusan" class="form-control" required>
+                                <option value="" disabled selected>(Pilih jurusan)</option>
+                                <option value="SI">Sistem Informasi</option>
+                                <option value="E">Elektro</option>
+                                <option value="I">Informatika</option>
+                            </select>
+                        </div>
+                        <div class="col-4 mt-1 text-danger" id="data_jurusan_error">
+                            Harus dipilih
+                        </div>
+                    </div>
+                    <div class="row mb-3 form-group">
+                        <label for="nomor_handphone" class="col-2 col-form-label">Nomor Handphone:</label>
+                        <div class="col-10">
+                            <input type="number" class="form-control" id="nomor_handphone" required>
+                        </div>
+                        <div class="col-4 mt-1 text-danger" id="nomor_handphone_error">
+                            Harus diisi dengan angka dan minimal 10 digit
+                        </div>
+                    </div>
+                    <br> 
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary rounded-pill" id="submit_button">Submit</button>
+                        <button type="button" class="btn btn-primary rounded-pill" id="reset_button">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+         $(document).ready(function() {
+            $("#nama_mahasiswa_error").hide();
+            $("#nrp_mahasiswa_error").hide();
+            $("#data_jurusan_error").hide();
+            $("#nomor_handphone_error").hide();
+        })
+
+        var error_nama_mahasiswa = true;
+        var error_nrp_mahasiwa = true;
+        var error_data_jurusan = true;
+        var error_nomor_handphone = true;
+
+        function check_nama_mahasiswa() {
+            var minLength = 1;
+            var charLength = $("#nama_mahasiswa").val().length;
+
+            if (charLength < minLength) {
+               $("#nama_mahasiswa_error").show();
+            } else {
+               error_nama_mahasiswa = false;
+               $("#nama_mahasiswa_error").hide();
+            }
+         }
+
+         function check_nrp_mahasiswa() {
+            var minLength = 10;
+            var charLength = $("#nrp_mahasiswa").val().length;
+
+            if (charLength < minLength || charLength > minLength) {
+               $("#nrp_mahasiswa_error").show();
+            } else {
+               error_nrp_mahasiswa = false;
+               $("#nrp_mahasiswa_error").hide();
+            }
+         }
+
+         function check_data_jurusan() {
+             var country = $("#data_jurusan :selected").val();
+             var length = data_jurusan.length;
+
+             if (length <= 0) {
+                 $("#data_jurusan_error").show();
+             } else {
+                error_data_jurusan = false;
+                $("#data_jurusan_error").hide();
+             }
+         }
+
+         function check_nomor_handphone() {
+            var minLength = 10;
+            var charLength = $("#nomor_handphone").val().length;
+
+            if (charLength < minLength) {
+               $("#nomor_handphone_error").show();
+            } else {
+               error_nomor_handphone = false;
+               $("#nomor_handphone_error").hide();
+            }
+         }
+
+         function submit_form() {
+             $("#form_uts").submit();
+         }
+
+         function reset_form() {
+             $("#form_uts").reset();
+         }
+
+         $("#submit_button").click(function() {
+            error_nama_mahasiswa = true;
+            error_nrp_mahasiswa = true;
+            error_data_jurusan = true;
+            error_nomor_handphone = true;
+
+            check_nama_mahasiswa();
+            check_nrp_mahasiswa();
+            check_data_jurusan();
+            check_nomor_handphone();
+
+            if(error_nama_mahasiswa === true || nrp_mahasiswa === true || data_jurusan === true || nomor_handphone === true) {
+                alert("Tolong masukkan data form dengan benar");
+            } else {
+                submit_form();
+            }
+        })
+
+        $(function() {
+            $("#reset_button").click(function() {
+                $(':input','#form_uts')
+                    .not(':button, :submit, :reset, :hidden')
+                    .val('')
+                    .removeAttr('checked')
+                    .removeAttr('selected');
+            });
+        });
+    </script>
+</body>
+</html>
